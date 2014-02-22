@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        
+" xmlns:tx="http://www.springframework.org/schema/tx">
+
+   <bean id="entityManager" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+     <property name="persistenceUnitName"  value="educationPU" />
+   </bean>
+   
+   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="entityManager" />
+   </bean>
+
+   <!--tx:annotation-driven transaction-manager="transactionManager" >
+   </tx:annotation-driven-->
+  
+   
+   <bean id="genericDao" class="com.kftgroup.dao.GenericDao"/>
+
+   <bean id="genericDaoImpl" class="com.kftgroup.dao.impl.GenericDaoImpl">
+     <property name="entityManagerFactory" ref="entityManagerFactory" />
+   </bean>
+
+</beans>
